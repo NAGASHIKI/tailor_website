@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The King's Suitup</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="title"><a href="#">The King's Suitup</a></li>
+            <li class="search-container">
+                <input type="text" placeholder="Search...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </li>
+            <li><a class="fas fa-globe" href="#"></a></li>
+            <li><a class="fas fa-envelope" href="#"></a></li>
+            <li><a class="fas fa-bell" href="#"></a></li>
+            <li class="username">Hello, <span class="log log1">{{ user.name }}</span></li>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+            </form>          
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>Dresses</h2>
+        <div class="products">
+            {% for dress in dresses %}
+            <div class="product-card">
+                <img src="{{ dress.image.url }}" alt="{{ dress.name }}" />
+                <h3>{{ dress.name }}</h3>
+                <p>${{ dress.price }}</p>
+                <p>{{ dress.description }}</p>
+                <a href="{% url 'submit_measurements' dress.id %}" class="btn">Submit Measurements</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Customer Services</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Social Media</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Profile</h4>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Order Tracking</a></li>
+                        <li><a href="#">Help & Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="#">Phone +237 699-99-99-99</a></li>
+                        <li><a href="#">Email example@gmail.com</a></li>
+                        <li><a href="#">Address 123 256 65, Nkolanga</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

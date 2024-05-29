@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Submit Measurements</title>
+  </head>
+  <body>
+    <h2>Submit Measurements for {{ dress.name }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      <textarea
+        name="measurements"
+        placeholder="Enter your measurements"
+      ></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ tailor.user.username }}'s Work</title>
+  </head>
+  <body>
+    <h2>{{ tailor.user.username }}'s Work</h2>
+    <p>{{ tailor.bio }}</p>
+    <ul>
+      {% for dress in dresses %}
+      <li>
+        <img src="{{ dress.image.url }}" alt="{{ dress.name }}" />
+        <p>{{ dress.name }} - ${{ dress.price }}</p>
+        <p>{{ dress.description }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
