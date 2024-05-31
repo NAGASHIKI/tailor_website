@@ -20,7 +20,7 @@
             <li><a class="fas fa-globe" href="#"></a></li>
             <li><a class="fas fa-envelope" href="#"></a></li>
             <li><a class="fas fa-bell" href="#"></a></li>
-            <li class="username">Hello, <span class="log log1">{{ user.name }}</span></li>
+            <li class="username">Hello,  <span class="log log1">{{ user.username }}</span></li>
             <form action="{% url 'logout' %}" method="post">
               {% csrf_token %}
               <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
@@ -29,13 +29,13 @@
     </nav>
 
     <div class="content">
-        <h2>Dresses</h2>
+        <!-- <h2>Dresses</h2> -->
         <div class="products">
             {% for dress in dresses %}
             <div class="product-card">
                 <img src="{{ dress.image.url }}" alt="{{ dress.name }}" />
                 <h3>{{ dress.name }}</h3>
-                <p>${{ dress.price }}</p>
+                <p>{{ dress.price }} Fcfa</p>
                 <p>{{ dress.description }}</p>
                 <a href="{% url 'submit_measurements' dress.id %}" class="btn">Submit Measurements</a>
             </div>
