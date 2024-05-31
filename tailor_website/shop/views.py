@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+# shop/views.py
+
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .models import Dress, Measurement, Tailor
 from django.contrib.auth.decorators import login_required
+from .models import Dress, Measurement, Tailor
 
-
-# Create your views here.
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -27,16 +27,15 @@ def home(request):
 
 @login_required
 def submit_measurements(request, dress_id):
+    dress = get_object_or_404(Dress, id=dress_id)
     if request.method == 'POST':
         measurements = request.POST.get('measurements')
-        dress = Dress.objects.get(id=dress_id)
         Measurement.objects.create(user=request.user, dress=dress, measurements=measurements)
         return redirect('home')
-    dress = Dress.objects.get(id=dress_id)
     return render(request, 'submit_measurements.html', {'dress': dress})
 
 @login_required
 def tailor_work(request, tailor_id):
-    tailor = Tailor.objects.get(id=tailor_id)
+    tailor = get_object_or_404(Tailor, id=tailor_id)
     dresses = Dress.objects.filter(tailor=tailor)
     return render(request, 'tailor_work.html', {'tailor': tailor, 'dresses': dresses})
